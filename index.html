@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,146 +13,149 @@
       touch-action: manipulation;
     }
 
-    body {
-      font-family: sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #ffffff;
-      transition: background-color 0.3s;
-    }
+```
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
 
-    body.dark {
-      background-color: #000000;
-    }
+body.dark {
+  background-color: #000000;
+}
 
-    /* Progress bar */
-    .progress-container {
-      width: 100%;
-      padding: 72px 32px 0 32px;
-    }
+/* Progress bar */
+.progress-container {
+  width: 100%;
+  padding: 72px 32px 0 32px;
+}
 
-    .progress-label {
-      font-size: 0.78rem;
-      color: #888;
-      margin-bottom: 6px;
-      text-align: right;
-      transition: color 0.3s;
-    }
+.progress-label {
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 6px;
+  text-align: right;
+  transition: color 0.3s;
+}
 
-    body.dark .progress-label {
-      color: #666;
-    }
+body.dark .progress-label {
+  color: #666;
+}
 
-    .progress-track {
-      width: 100%;
-      height: 10px;
-      background: #e0e0e0;
-      border-radius: 999px;
-      overflow: hidden;
-      transition: background 0.3s;
-    }
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #e0e0e0;
+  border-radius: 999px;
+  overflow: hidden;
+  transition: background 0.3s;
+}
 
-    body.dark .progress-track {
-      background: #2a2a2a;
-    }
+body.dark .progress-track {
+  background: #2a2a2a;
+}
 
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 999px;
-      background: #1a2a4d;
-      transition: width 0.3s ease, background 0.4s ease;
-    }
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: #1a2a4d;
+  transition: width 0.3s ease, background 0.4s ease;
+}
 
-    /* Main area */
-    .top-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      padding: 40px 20px;
-    }
+/* Main area */
+.top-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+}
 
-    #count {
-      font-size: 6rem;
-      font-weight: bold;
-      color: #000000;
-      transition: color 0.4s;
-      user-select: none;
-    }
+#count {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #000000;
+  transition: color 0.4s;
+  user-select: none;
+}
 
-    body.dark #count {
-      color: #ffffff;
-    }
+body.dark #count {
+  color: #ffffff;
+}
 
-    #increment {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: #28a745;
-      color: white;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
+#increment {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: #28a745;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 
-    #increment:active {
-      transform: scale(0.95);
-    }
+#increment:active {
+  transform: scale(0.95);
+}
 
-    .bottom-area {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      padding: 24px 20px;
-    }
+.bottom-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 20px;
+}
 
-    #reset {
-      padding: 14px 40px;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #e24a4a;
-      color: white;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-      transition: transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
+#reset {
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #e24a4a;
+  color: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 
-    #reset:active {
-      transform: scale(0.95);
-    }
+#reset:active {
+  transform: scale(0.95);
+}
 
-    #mode-toggle {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      padding: 8px 16px;
-      font-size: 0.85rem;
-      border: 2px solid #999;
-      border-radius: 20px;
-      background: transparent;
-      cursor: pointer;
-      color: #444;
-      transition: color 0.3s, border-color 0.3s;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
+#mode-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border: 2px solid #999;
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+  color: #444;
+  transition: color 0.3s, border-color 0.3s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 
-    body.dark #mode-toggle {
-      color: #cccccc;
-      border-color: #555555;
-    }
+body.dark #mode-toggle {
+  color: #cccccc;
+  border-color: #555555;
+}
+```
+
   </style>
 </head>
 <body>
@@ -233,5 +237,6 @@
       update();
     }
   </script>
+
 </body>
 </html>
