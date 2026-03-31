@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Counter</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      touch-action: manipulation;
     }
 
     body {
@@ -80,6 +81,7 @@
       font-weight: bold;
       color: #000000;
       transition: color 0.4s;
+      user-select: none;
     }
 
     body.dark #count {
@@ -90,14 +92,14 @@
       width: 160px;
       height: 160px;
       border-radius: 50%;
-      font-size: 1.5rem;
-      font-weight: bold;
       border: none;
       cursor: pointer;
       background: #28a745;
       color: white;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
       transition: transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     #increment:active {
@@ -112,7 +114,7 @@
     }
 
     #reset {
-      padding: 12px 36px;
+      padding: 14px 40px;
       font-size: 1rem;
       font-weight: bold;
       border: none;
@@ -122,6 +124,8 @@
       color: white;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
       transition: transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     #reset:active {
@@ -140,6 +144,8 @@
       cursor: pointer;
       color: #444;
       transition: color 0.3s, border-color 0.3s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     body.dark #mode-toggle {
@@ -170,8 +176,6 @@
   <script>
     let count = 0;
 
-    // Steps 1-8: subtle blue ramp (dark to medium blue)
-    // Step 9 at 108: neon green spike
     const colorSteps = [
       '#1a2a5c', // 12
       '#1d3470', // 24
