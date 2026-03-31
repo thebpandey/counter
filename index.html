@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Counter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffffff;
+      transition: background-color 0.3s;
+    }
+
+    body.dark {
+      background-color: #000000;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      padding: 72px 32px 0 32px;
+    }
+
+    .progress-label {
+      font-size: 0.78rem;
+      color: #888;
+      margin-bottom: 6px;
+      text-align: right;
+      transition: color 0.3s;
+    }
+
+    body.dark .progress-label {
+      color: #666;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 999px;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    body.dark .progress-track {
+      background: #2a2a2a;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: #1a2a4d;
+      transition: width 0.3s ease, background 0.4s ease;
+    }
+
+    /* Main area */
+    .top-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+
+    #count {
+      font-size: 6rem;
+      font-weight: bold;
+      color: #000000;
+      transition: color 0.4s;
+    }
+
+    body.dark #count {
+      color: #ffffff;
+    }
+
+    #increment {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      background: #28a745;
+      color: white;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.1s;
+    }
+
+    #increment:active {
+      transform: scale(0.95);
+    }
+
+    .bottom-area {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+
+    #reset {
+      padding: 12px 36px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #e24a4a;
+      color: white;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.1s;
+    }
+
+    #reset:active {
+      transform: scale(0.95);
+    }
+
+    #mode-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      border: 2px solid #999;
+      border-radius: 20px;
+      background: transparent;
+      cursor: pointer;
+      color: #444;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    body.dark #mode-toggle {
+      color: #cccccc;
+      border-color: #555555;
+    }
+  </style>
+</head>
+<body>
+  <button id="mode-toggle" onclick="toggleMode()">Dark Mode</button>
+
+  <div class="progress-container">
+    <div class="progress-label" id="progress-label">0 / 108</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="top-area">
+    <div id="count">0</div>
+    <button id="increment" onclick="increment()"></button>
+  </div>
+
+  <div class="bottom-area">
+    <button id="reset" onclick="resetCount()">Reset</button>
+  </div>
+
+  <script>
+    let count = 0;
+
+    // Steps 1-8: subtle blue ramp (dark to medium blue)
+    // Step 9 at 108: neon green spike
+    const colorSteps = [
+      '#1a2a5c', // 12
+      '#1d3470', // 24
+      '#203e84', // 36
+      '#224898', // 48
+      '#2552ac', // 60
+      '#275cc0', // 72
+      '#2a66d4', // 84
+      '#2c70e8', // 96
+      '#39ff14', // 108 - neon green
+    ];
+
+    function getCounterColor() {
+      const isDark = document.body.classList.contains('dark');
+      if (count < 12) return isDark ? '#ffffff' : '#000000';
+      const step = Math.min(Math.floor(count / 12) - 1, colorSteps.length - 1);
+      return colorSteps[step];
+    }
+
+    function getProgressColor() {
+      if (count < 12) return '#1a2a5c';
+      const step = Math.min(Math.floor(count / 12) - 1, colorSteps.length - 1);
+      return colorSteps[step];
+    }
+
+    function update() {
+      const el = document.getElementById('count');
+      const fill = document.getElementById('progress-fill');
+      const label = document.getElementById('progress-label');
+
+      el.textContent = count;
+      el.style.color = getCounterColor();
+
+      const pct = Math.min((count / 108) * 100, 100);
+      fill.style.width = pct + '%';
+      fill.style.background = getProgressColor();
+      label.textContent = Math.min(count, 108) + ' / 108';
+    }
+
+    function increment() {
+      count++;
+      update();
+    }
+
+    function resetCount() {
+      count = 0;
+      update();
+    }
+
+    function toggleMode() {
+      const body = document.body;
+      const btn = document.getElementById('mode-toggle');
+      body.classList.toggle('dark');
+      btn.textContent = body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+      update();
+    }
+  </script>
+</body>
+</html>
